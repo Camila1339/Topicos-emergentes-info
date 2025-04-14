@@ -16,25 +16,25 @@
 
     <?php
     if (isset($_POST['calcular'])) {
-        // Receber os valores do formulário
+        
         $divida = $_POST['divida'];
         $juros = $_POST['juros'];
         $parcelas = $_POST['parcelas'];
 
-        // Validar se os valores são positivos
+       
         if ($divida <= 0 || $juros < 0 || $parcelas <= 0) {
             echo "Por favor, insira valores válidos (positivos).";
         } else {
-            // Cálculo dos juros simples
+            
             $montante = $divida + ($divida * ($juros / 100) * $parcelas);
             $valor_parcela = $montante / $parcelas;
 
-            // Exibir resultados
+            
             echo "<h3>Resultado:</h3>";
             echo "Valor total com juros: R$ " . number_format($montante, 2, ',', '.') . "<br>";
             echo "Valor de cada parcela: R$ " . number_format($valor_parcela, 2, ',', '.') . "<br><br>";
 
-            // Exibir a tabela das parcelas
+           
             echo "<table border='1' cellpadding='5'>";
             echo "<tr><th>Parcela</th><th>Valor da Parcela</th><th>Valor Total com Juros</th></tr>";
             for ($i = 1; $i <= $parcelas; $i++) {
