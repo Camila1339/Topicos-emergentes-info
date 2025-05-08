@@ -19,5 +19,20 @@
          <input type="submit" value=Cadastrar>
 
          </form>
+        <?php
+include ("conexao.php"); 
+
+$sql = "SELECT * FROM contatos";
+
+$res = mysqli_query($conexao, $sql);
+
+if (mysqli_num_rows($res) > 0) {
+    while ($linha = mysqli_fetch_assoc($res)) { 
+        echo $linha['nome'] . " - " . $linha['endereco'] . " - " . $linha['telefone'] .  "<br>";
+    }
+} else {
+    echo "Nenhum contato encontrado.";
+}
+?>
 </body>
 </html>
