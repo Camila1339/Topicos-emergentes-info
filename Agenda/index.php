@@ -1,38 +1,35 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html>
+
 <body>
-    <h1>Contatos</h1>
-        <form action=salva.php method= "post">
+    <h2>Cadastrar Contato</h2>
 
-         Nome:<input type="text" name="nome">
-        <br>
-         Endereço: <input type="text" name="endereco">
-        <br>
-         Telefone: <input type="text" name="telefone">
-        <br>
-         <input type="submit" value=Cadastrar>
+    <form method="post" action="salva.php">
 
-         </form>
-        <?php
-include ("conexao.php"); 
+        Nome: <input type="text" name="nome" required><br><br>
+        Endereço: <input type="text" name="endereco"><br><br>
+        Telefone: <input type="text" name="telefone"><br><br>
+        <input type="submit" value="Salvar">
+    </form>
 
-$sql = "SELECT * FROM contatos";
+    <h2>Lista de Contatos</h2>
+    <?php
+    include('conexao.php');
 
-$res = mysqli_query($conexao, $sql);
+    $sql = "SELECT * FROM contatos";
 
-if (mysqli_num_rows($res) > 0) {
-    while ($linha = mysqli_fetch_assoc($res)) { 
-        echo $linha['nome'] . " - " . $linha['endereco'] . " - " . $linha['telefone'] .  "<br>";
+    $resultado = mysqli_query($conexao, $sql);
+
+    if (mysqli_num_rows($resultado) > 0) {
+        while ($linha = mysqli_fetch_assoc($resultado)) {
+            echo $linha['nome'] . " | " . $linha['endereco'] . " | " . $linha['telefone'] .
+                " | <a href='editar.php?id=" . $linha["id"] . "'>Editar</a>" .
+                " | <a href='excluir.php?id=" . $linha["id"] . "'>Excluir</a> <br>";
+        }
+    } else {
+        echo "Nenhum contato encontrado.";
     }
-} else {
-    echo "Nenhum contato encontrado.";
-}
-?>
+    ?>
 </body>
+
 </html>
