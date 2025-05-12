@@ -2,7 +2,7 @@
 <?php
 $servidor = "localhost";
 $user = "root";
-$senha = " ";
+$senha = "";
 $banco= "agenda";
 
 $conexao = mysqli_connect($servidor, $user, $senha, $banco);
